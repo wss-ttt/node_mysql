@@ -10,7 +10,14 @@ const connection = mysql.createConnection({
 });
 
 // 3. 链接数据库
-connection.connect();
+connection.connect(function(err){
+	if(err){
+		console.log('数据库连接失败');
+		console.log('err:',err);
+		return;
+	}
+	console.log('连接成功')
+});
 
 // 4. 执行sql语句
 let sql = "select * from sys_post";
