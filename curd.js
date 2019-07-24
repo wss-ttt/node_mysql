@@ -20,7 +20,7 @@ connection.connect(function(err) {
 });
 
 // 4. 添加
-let insertSql = 'insert into students(name,age) values(?,?)';
+/* let insertSql = 'insert into students(name,age) values(?,?)';
 let insertParms = ['关羽',27];
 connection.query(insertSql,insertParms,function(err,res){
 	if(err){
@@ -28,22 +28,33 @@ connection.query(insertSql,insertParms,function(err,res){
 		return;
 	}
 	console.log('数据添加成功',res);
-});
+}); */
 
 
 // 5. 删除
-let deleteSql = 'delete from students where id = 2';
+/* let deleteSql = 'delete from students where id = 2';
 connection.query(deleteSql,function(err,res){
 	if(err){
 		console.log('数据删除失败');
 		return;
 	}
 	console.log('数据删除成功',res);
-});
+}); */
 
 // 6. 修改
-let updateSql = `update students set name ='哈哈' where id = 3`;
+/* let updateSql = `update students set name ='哈哈' where id = 3`;
 connection.query(updateSql,function(err,res){
+	if(err){
+		console.log('数据修改失败');
+		return;
+	}
+	console.log('数据修改成功',res);
+}); */
+
+
+let updateSql = `update students set name =?,age=? where id = ?`;
+let updateParms = ['张三丰','38',5];
+connection.query(updateSql,updateParms,function(err,res){
 	if(err){
 		console.log('数据修改失败');
 		return;
