@@ -103,14 +103,13 @@ app.get('/students/getListByName', function(req, res) {
 
 
 // 删除操作 post请求
-app.post('/students/delete', function(req, res) {
-	let parms = req.body;
-	let id = parms.id;
+app.get('/students/delete', function(req, res) {
+	let parms = req.query;
+	let ids = parms.id;
 	console.log('parms:', parms);
-	console.log('id', id);
-
-	let sql = 'delete from students where id = ?';
-	connection.query(sql, id, function(err, results) {
+	console.log('id', ids);
+	let sql = 'delete from students where id in ('+ids+')';
+	connection.query(sql, function(err, results) {
 		if (err) {
 			return res.json({
 				code: 1,
