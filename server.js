@@ -75,7 +75,9 @@ app.get('/students/details', function(req, res) {
 		res.json({
 			code: 0,
 			message: 'success',
-			data: results
+			// data: results    // 这样返回的是一个数组
+			// 因为查询出来就只有一条数据 我们就直接返回一个对象
+			data: results[0] // results是一个数组
 		});
 	});
 });
@@ -104,15 +106,15 @@ app.get('/students/getListByName', function(req, res) {
 app.post('/students/delete', function(req, res) {
 	let parms = req.body;
 	let id = parms.id;
-	console.log('parms:',parms);
-	console.log('id',id);
+	console.log('parms:', parms);
+	console.log('id', id);
 
 	let sql = 'delete from students where id = ?';
 	connection.query(sql, id, function(err, results) {
 		if (err) {
 			return res.json({
-				code:1,
-				message:'error'
+				code: 1,
+				message: 'error'
 			});
 		}
 		res.json({
@@ -122,21 +124,45 @@ app.post('/students/delete', function(req, res) {
 	});
 });
 // 新增
-app.post('/students/add',function(req,res){
+app.post('/students/add', function(req, res) {
 	var name = req.body.name;
 	var age = req.body.age;
 	var sql = 'insert into students(name,age) values(?,?)';
-	var parms = [name,age];
-	connection.query(sql,parms,function(err,results){
+	var params = [name, age];
+	connection.query(sql, params, function(err, results) {
+		if (err) {
+			return res.json({
+				code: 1,
+				message: 'error'
+			});
+		}
+		res.json({
+			code: 0,
+			message: 'success',
+			data: results
+		});
+	});
+});
+
+
+// 修改
+app.post('/students/update', function(req, res) {
+	var id = req.body.id;
+	var name = req.body.name;
+	var age = req.body.age;
+	var sql = 'update students set name = ?,age=? where id =?';
+	var params = [name,age,id];
+	connection.query(sql,params,function(err,results){
+		console.log(results);
 		if(err){
 			return res.json({
 				code:1,
 				message:'error'
 			});
 		}
-		res.json({
+		return res.json({
 			code:0,
-			data:results
+			message:'success'
 		});
 	});
 });
