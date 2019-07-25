@@ -6,7 +6,7 @@ const bodyParser = require('body-parser');
 
 // 2 配置
 // parse application/x-www-form-urlencoded
-// app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({ extended: false }));
 // parse application/json
 app.use(bodyParser.json());
 
@@ -143,14 +143,6 @@ app.post("/test",function(req,res){
 })
 
 
-app.post('/test', urlencodedParser, function(req, res) {
-	var id = req.body.id;
-	var name = req.body.name;
-	console.log(id, name);
-	res.send({
-		'msg': 'success'
-	});
-});
 
 
 app.listen(3000, function() {
