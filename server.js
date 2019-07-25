@@ -162,14 +162,18 @@ app.post('/students/update', function(req, res) {
 		}
 		return res.json({
 			code:0,
-			message:'success'
+			message:'success',
+			data:results
 		});
 	});
 });
 
 
 app.post("/", function(req, res) {
-	console.log(JSON.stringify(req.body));
+	var id = req.body.id;
+	var name = req.body.name;
+	console.log('id:',id);
+	console.log('name',name);
 	res.send({
 		hello: 'world'
 	});
