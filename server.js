@@ -109,7 +109,8 @@ app.get('/students/delete', function(req, res) {
 	console.log('parms:', parms);
 	console.log('id', ids);
 	let sql = 'delete from students where id in ('+ids+')';
-	connection.query(sql, function(err, results) {
+	console.log(sql);
+	connection.query(sql,function(err, results) {
 		if (err) {
 			return res.json({
 				code: 1,
