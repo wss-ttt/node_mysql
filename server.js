@@ -121,6 +121,25 @@ app.post('/students/delete', function(req, res) {
 		});
 	});
 });
+// 新增
+app.post('/students/add',function(req,res){
+	var name = req.body.name;
+	var age = req.body.age;
+	var sql = 'insert into students(name,age) values(?,?)';
+	var parms = [name,age];
+	connection.query(sql,parms,function(err,results){
+		if(err){
+			return res.json({
+				code:1,
+				message:'error'
+			});
+		}
+		res.json({
+			code:0,
+			data:results
+		});
+	});
+});
 
 
 app.post("/", function(req, res) {
