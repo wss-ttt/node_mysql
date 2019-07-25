@@ -6,7 +6,9 @@ const bodyParser = require('body-parser');
 
 // 2 配置
 // parse application/x-www-form-urlencoded
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({
+	extended: false
+}));
 // parse application/json
 app.use(bodyParser.json());
 
@@ -100,13 +102,12 @@ app.get('/students/getListByName', function(req, res) {
 
 // 删除操作 post请求
 app.post('/students/delete', function(req, res) {
-	/* let parms = req.body;
-	console.log('parms:',parms);
+	let parms = req.body;
 	let id = parms.id;
-	console.log('id',id); */
+	console.log('parms:',parms);
+	console.log('id',id);
 
-	res.send(req.body);
-	/* let sql = 'delete from students where id = ?';
+	let sql = 'delete from students where id = ?';
 	connection.query(sql, id, function(err, results) {
 		if (err) {
 			return res.json({
@@ -118,7 +119,7 @@ app.post('/students/delete', function(req, res) {
 			code: 0,
 			message: 'success',
 		});
-	}); */
+	});
 });
 
 
@@ -129,16 +130,16 @@ app.post("/", function(req, res) {
 	});
 })
 
-app.post("/test",function(req,res){
+app.post("/test", function(req, res) {
 	var parms = req.body;
 	var id = parms.id;
 	var name = parms.name;
-	console.log('id',id);
-	console.log('name',name);
-    res.send({
-		id:id,
-		name:name,
-		msg:'success'
+	console.log('id', id);
+	console.log('name', name);
+	res.send({
+		id: id,
+		name: name,
+		msg: 'success'
 	});
 })
 
