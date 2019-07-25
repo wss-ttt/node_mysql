@@ -8,7 +8,7 @@ const bodyParser = require('body-parser');
 // parse application/x-www-form-urlencoded
 // app.use(bodyParser.urlencoded({ extended: false }));
 // parse application/json
-// app.use(bodyParser.json());
+app.use(bodyParser.json());
 
 
 var urlencodedParser = bodyParser.urlencoded({
@@ -126,6 +126,19 @@ app.post("/", function(req, res) {
 	console.log(JSON.stringify(req.body));
 	res.send({
 		hello: 'world'
+	});
+})
+
+app.post("/test",function(req,res){
+	var parms = req.body;
+	var id = parms.id;
+	var name = parms.name;
+	console.log('id',id);
+	console.log('name',name);
+    res.send({
+		id:id,
+		name:name,
+		msg:'success'
 	});
 })
 
