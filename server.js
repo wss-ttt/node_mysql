@@ -6,9 +6,14 @@ const bodyParser = require('body-parser');
 
 // 2 配置
 // parse application/x-www-form-urlencoded
-app.use(bodyParser.urlencoded({ extended: false }));
+// app.use(bodyParser.urlencoded({ extended: false }));
 // parse application/json
 // app.use(bodyParser.json());
+
+
+var urlencodedParser = bodyParser.urlencoded({
+	extended: false
+})
 
 const connection = mysql.createConnection({
 	host: 'localhost',
@@ -99,7 +104,7 @@ app.post('/students/delete', function(req, res) {
 	console.log('parms:',parms);
 	let id = parms.id;
 	console.log('id',id); */
-	
+
 	res.send(req.body);
 	/* let sql = 'delete from students where id = ?';
 	connection.query(sql, id, function(err, results) {
@@ -117,10 +122,22 @@ app.post('/students/delete', function(req, res) {
 });
 
 
-app.post("/",function(req,res){
-    console.log(JSON.stringify(req.body));
-    res.send({hello:'world'});
+app.post("/", function(req, res) {
+	console.log(JSON.stringify(req.body));
+	res.send({
+		hello: 'world'
+	});
 })
+
+
+app.post('/test', urlencodedParser, function(req, res) {
+	var id = req.body.id;
+	var name = req.body.name;
+	console.log(id, name);
+	res.send({
+		'msg': 'success'
+	});
+});
 
 
 app.listen(3000, function() {
